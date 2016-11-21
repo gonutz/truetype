@@ -988,9 +988,6 @@ func (font *FontInfo) FindGlyphIndex(unicodeCodepoint int) int {
 		search -= 2
 		for entrySelector > 0 {
 			searchRange >>= 1
-			// start := int(u16(data, search+2+segcount*2+2))
-			// end := int(u16(data, search+2))
-			// start := int(u16(data, search+searchRange*2+segcount*2+2))
 			end := int(u16(data, search+searchRange*2))
 			if unicodeCodepoint > end {
 				search += searchRange * 2
@@ -1005,7 +1002,6 @@ func (font *FontInfo) FindGlyphIndex(unicodeCodepoint int) int {
 			panic("unicode codepoint doesn't match")
 		}
 		start := int(u16(data, indexMap+14+segcount*2+2+2*item))
-		// end := int(u16(data, indexMap+14+2+2*item))
 		if unicodeCodepoint < start {
 			return 0
 		}
